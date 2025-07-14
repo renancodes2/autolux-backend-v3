@@ -1,0 +1,142 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  USER
+}
+
+enum OrderStatus {
+  PENDING
+  APPROVED
+  PREPARING
+  SENT
+  DELIVERED
+  CANCELLED
+}
+
+enum Transmission {
+  MANUAL
+  AUTOMATIC
+  CVT
+}
+
+model User {
+  id          String   @id @default(uuid())
+  name        String
+  email       String   @unique
+  password    String
+  role        Role     @default(USER)
+  createdAt   DateTime @default(now())
+
+  vehicles    Vehicle[]
+  orders      Order[]
+  favorites   Favorite[]
+  simulations Simulation[]
+  reviews     Review[]
+}
+
+model Category {
+  id       String    @id @default(uuid())
+  name     String    @unique
+  vehicles Vehicle[]
+}
+
+model Brand {
+  id        String    @id @default(uuid())
+  name      String    @unique
+  vehicles  Vehicle[]
+}
+
+model Vehicle {
+  id           String       @id @default(uuid())
+  name         String
+  model        String
+  description  String
+  price        Float
+  year         Int
+  km           Int
+  color        String?
+  engine       String?
+  transmission Transmission
+  country      String
+  state        String
+  city         String
+  licensePlate String?
+
+  imageUrls    String[]
+  available    Boolean      @default(true)
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+
+  seller       User         @relation(fields: [sellerId], references: [id])
+  sellerId     String
+
+  category     Category     @relation(fields: [categoryId], references: [id])
+  categoryId   String
+
+  brand        Brand        @relation(fields: [brandId], references: [id])
+  brandId      String
+
+  orders       Order[]
+  favorites    Favorite[]
+  reviews      Review[]
+  simulations  Simulation[]
+}
+
+model Order {
+  id        String       @id @default(uuid())
+  status    OrderStatus  @default(PENDING)
+  createdAt DateTime     @default(now())
+
+  buyer     User         @relation(fields: [buyerId], references: [id])
+  buyerId   String
+
+  vehicle   Vehicle      @relation(fields: [vehicleId], references: [id])
+  vehicleId String
+}
+
+model Favorite {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+
+  vehicle   Vehicle  @relation(fields: [vehicleId], references: [id])
+  vehicleId String
+}
+
+model Simulation {
+  id        String   @id @default(uuid())
+  entrada   Float
+  parcelas  Int
+  taxa      Float
+  resultado Float
+  createdAt DateTime @default(now())
+
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+
+  vehicle   Vehicle  @relation(fields: [vehicleId], references: [id])
+  vehicleId String
+}
+
+model Review {
+  id        String   @id @default(uuid())
+  rating    Int
+  comment   String
+  createdAt DateTime @default(now())
+
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+
+  vehicle   Vehicle  @relation(fields: [vehicleId], references: [id])
+  vehicleId String
+}
