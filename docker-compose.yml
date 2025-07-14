@@ -13,24 +13,31 @@ services:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   backend:
     build: .
     container_name: autolux-api
     restart: always
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     ports:
       - "3333:3333"
-    environment:
-      DATABASE_URL: "postgresql://postgres:adminpizzaria@db:5432/auto_lux"
-      JWT_SECRET: "63842a8997f99faa0668f8e245ed0c81"
-      CLOUDINARY_NAME: "dfhdgmxot"
-      CLOUDINARY_API_KEY: "741594749368934"
-      CLOUDINARY_API_SECRET: "4X5Ti273kiR2qXD4jTr0cv8zyTo"
+    env_file:
+      - .env
+    networks:
+      - autolux-net
     volumes:
-      - .:/app
-    command: npm run start:dev
+      - autolux-app:/app
 
 volumes:
   pgdata:
+  autolux-app:
+
+networks:
+  autolux-net:
