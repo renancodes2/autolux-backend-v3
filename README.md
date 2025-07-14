@@ -64,60 +64,72 @@
 
 O projeto conta com:
 
-- Dockerfile multi-stage (produção)
-- Compose com banco PostgreSQL + healthcheck
-- Volume nomeado, rede isolada e env por ambiente
+- Dockerfile multi-stage (produção)  
+- Compose com banco PostgreSQL + healthcheck  
+- Volume nomeado, rede isolada e env por ambiente  
 - Ideal para ambientes de desenvolvimento e produção
 
 ```bash
-# Subir com Docker  
+# Subir com Docker
 docker-compose up --build
-````
-## 🔁 Integração Contínua (CI)  
-Workflow com GitHub Actions:  
+```
+
+## 🔁 Integração Contínua (CI)
+
+Workflow com GitHub Actions:
+
 - Build e testes automáticos a cada push/pull request  
 - Banco de dados PostgreSQL configurado em ambiente de CI  
 - Variáveis sensíveis protegidas com GitHub Secrets
 
-## 🔧 Instalação Manual  
-# 1. Clone o repositório  
-git clone https://github.com/renelps/autolux-api.git  
+## 🔧 Instalação Manual
+
+```bash
+# 1. Clone o repositório
+git clone https://github.com/renelps/autolux-api.git
 cd autolux-api
 
-# 2. Instale as dependências  
+# 2. Instale as dependências
 npm install
 
-# 3. Configure o .env  
-cp .env.example .env  
+# 3. Configure o .env
+cp .env.example .env
 # Edite o arquivo .env com suas variáveis
 
-# 4. Gere o Prisma Client e rode as migrações  
-npx prisma generate  
+# 4. Gere o Prisma Client e rode as migrações
+npx prisma generate
 npx prisma migrate dev --name init
 
-# 5. Inicie o servidor  
+# 5. Inicie o servidor
 npm run start:dev
+```
 
-## 🧪 Testes com Insomnia  
+## 🧪 Testes com Insomnia
+
 Um arquivo `.json` de requisições do Insomnia pode ser importado para testar todos os endpoints da API facilmente.
 
-## 📁 Estrutura Base  
-src/  
-├── auth/  
-├── vehicles/  
-├── categories/  
-├── brands/  
-├── orders/  
-├── favorites/  
-├── simulations/  
-├── reviews/  
-├── prisma/  
-├── common/  
-└── main.ts
+## 📁 Estrutura Base
 
-## 📄 Licença  
+```
+src/
+├── auth/
+├── vehicles/
+├── categories/
+├── brands/
+├── orders/
+├── favorites/
+├── simulations/
+├── reviews/
+├── prisma/
+├── common/
+└── main.ts
+```
+
+## 📄 Licença
+
 Este projeto está sob a licença MIT.
 
-## 👨‍💻 Autor  
-Feito com 💛 por @renelps  
+## 👨‍💻 Autor
+
+Feito com 💛 por [@renelps](https://github.com/renelps)  
 Contribuições e feedbacks são bem-vindos!
