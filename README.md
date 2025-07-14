@@ -98,4 +98,4 @@ Este projeto está sob a licença MIT.
 
 ---
 
-Feito com 💛 por [@seu-usuario](https://github.com/renelps)
+Feito com 💛 por [@renelps](https://github.com/renelps)
