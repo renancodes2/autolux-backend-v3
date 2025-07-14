@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    container_name: autolux-db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: adminpizzaria
+      POSTGRES_DB: auto_lux
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  backend:
+    build: .
+    container_name: autolux-api
+    restart: always
+    depends_on:
+      - db
+    ports:
+      - "3333:3333"
+    environment:
+      DATABASE_URL: "postgresql://postgres:adminpizzaria@db:5432/auto_lux"
+      JWT_SECRET: "63842a8997f99faa0668f8e245ed0c81"
+      CLOUDINARY_NAME: "dfhdgmxot"
+      CLOUDINARY_API_KEY: "741594749368934"
+      CLOUDINARY_API_SECRET: "4X5Ti273kiR2qXD4jTr0cv8zyTo"
+    volumes:
+      - .:/app
+    command: npm run start:dev
+
+volumes:
+  pgdata:
