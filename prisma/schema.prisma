@@ -28,12 +28,17 @@ enum Transmission {
 }
 
 model User {
-  id          String   @id @default(uuid())
+  id          String      @id @default(uuid())
   name        String
-  email       String   @unique
+  email       String      @unique
   password    String
-  role        Role     @default(USER)
-  createdAt   DateTime @default(now())
+  role        Role        @default(USER)
+  createdAt   DateTime    @default(now())
+
+  city        String?
+  state       String?
+  phone       String?
+  profilePic  String?
 
   vehicles    Vehicle[]
   orders      Order[]
@@ -41,6 +46,7 @@ model User {
   simulations Simulation[]
   reviews     Review[]
 }
+
 
 model Category {
   id       String    @id @default(uuid())
@@ -113,19 +119,29 @@ model Favorite {
   vehicleId String
 }
 
+enum InterestType {
+  SIMPLE
+  COMPOUND
+}
+
 model Simulation {
-  id        String   @id @default(uuid())
-  entrada   Float
-  parcelas  Int
-  taxa      Float
-  resultado Float
-  createdAt DateTime @default(now())
+  id              String        @id @default(uuid())
+  downPayment     Float
+  installments    Int
+  interestRate    Float
+  result          Float
+  financedAmount  Float
+  totalPaid       Float
+  interestType    InterestType  @default(COMPOUND)
+  cet             Float?
+  details         Json?
+  createdAt       DateTime      @default(now())
 
-  user      User     @relation(fields: [userId], references: [id])
-  userId    String
+  user            User          @relation(fields: [userId], references: [id])
+  userId          String
 
-  vehicle   Vehicle  @relation(fields: [vehicleId], references: [id])
-  vehicleId String
+  vehicle         Vehicle       @relation(fields: [vehicleId], references: [id])
+  vehicleId       String
 }
 
 model Review {
