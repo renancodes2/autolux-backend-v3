@@ -24,7 +24,8 @@ import { CloudinaryModule } from './cloudinary/cloudinary.module';
     AuthModule,
     CategoriesModule,
     BrandModule,
-    CloudinaryModule
+    CloudinaryModule,
+
   ],
 })
 export class AppModule {}
