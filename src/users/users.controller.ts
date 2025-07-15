@@ -6,17 +6,32 @@ import {
   Param,
   Post,
   Put,
+  UploadedFile,
+  UseInterceptors,
 } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { CloudinaryService } from '../cloudinary/cloudinary.service';
 
 @Controller('users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(
+    private readonly usersService: UsersService,
+    private readonly cloudinaryService: CloudinaryService,
+  ) {}
 
   @Post()
-  create(@Body() dto: CreateUserDto) {
+  @UseInterceptors(FileInterceptor('profilePic'))
+  async create(
+    @Body() dto: CreateUserDto,
+    @UploadedFile() file?: Express.Multer.File,
+  ) {
+    if (file) {
+      const uploadResult = await this.cloudinaryService.uploadImage(file);
+      dto.profilePic = uploadResult.secure_url;
+    }
     return this.usersService.create(dto);
   }
 
@@ -31,7 +46,16 @@ export class UsersController {
   }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() dto: UpdateUserDto) {
+  @UseInterceptors(FileInterceptor('profilePic'))
+  async update(
+    @Param('id') id: string,
+    @Body() dto: UpdateUserDto,
+    @UploadedFile() file?: Express.Multer.File,
+  ) {
+    if (file) {
+      const uploadResult = await this.cloudinaryService.uploadImage(file);
+      dto.profilePic = uploadResult.secure_url;
+    }
     return this.usersService.update(id, dto);
   }
 

@@ -24,7 +24,6 @@ export class UsersService {
 
   async findAll() {
     const users = await this.prisma.user.findMany();
-
     return users.map(({ password, ...rest }) => rest);
   }
 
