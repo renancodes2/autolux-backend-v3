@@ -20,8 +20,8 @@ export class SimulationsController {
 
   @UseGuards(AuthGuard('jwt'))
   @Post()
-  create(@Body() dto: CreateSimulationDto, @GetUser() user: any) {
-    return this.simulationsService.create(dto, user.userId);
+  create(@Body() dto: Omit<CreateSimulationDto, 'userId'>, @GetUser() user: any) {
+    return this.simulationsService.create(dto as any, user.userId);
   }
 
   @Get()

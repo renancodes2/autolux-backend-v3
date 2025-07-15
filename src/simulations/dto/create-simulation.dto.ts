@@ -1,17 +1,23 @@
-import { IsNotEmpty, IsNumber, IsString, Min } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsString, IsEnum, IsOptional } from 'class-validator';
+import { InterestType } from '@prisma/client';
 
 export class CreateSimulationDto {
   @IsNumber()
-  entrada!: number;
+  downPayment!: number;
 
   @IsNumber()
-  parcelas!: number;
+  installments!: number;
 
   @IsNumber()
-  taxa!: number;
+  interestRate!: number;
 
+  @IsOptional()
   @IsNumber()
-  resultado!: number;
+  cet?: number;
+
+  @IsEnum(InterestType)
+  @IsOptional()
+  interestType?: InterestType;
 
   @IsString()
   @IsNotEmpty()
