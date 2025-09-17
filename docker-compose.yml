@@ -33,7 +33,8 @@ services:
     networks:
       - autolux-net
     volumes:
-      - autolux-app:/app
+      - autolux-app:/app 
+    command: ["./wait-for-it.sh", "db:5432", "--", "npm", "run", "start"]
 
 volumes:
   pgdata:
