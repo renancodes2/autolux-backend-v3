@@ -131,5 +131,6 @@ Este projeto está sob a licença MIT.
 
 ## 👨‍💻 Autor
 
-Feito com 💛 por [@renelps](https://github.com/renelps)  
+Feito por [@renancodes2](https://github.com/renelps)  
 Contribuições e feedbacks são bem-vindos!
+
