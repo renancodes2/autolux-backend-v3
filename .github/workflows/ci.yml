@@ -2,9 +2,11 @@ name: CI - AutoLux Backend
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
   pull_request:
-    branches: [main]
+    branches:
+      - main
 
 jobs:
   backend-ci:
@@ -13,11 +15,11 @@ jobs:
 
     services:
       postgres:
-        image: postgres:15
+        image: postgres:16
         env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: adminpizzaria
-          POSTGRES_DB: auto_lux
+          POSTGRES_USER: ${{ secrets.POSTGRES_USER_TEST }} 
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD_TEST }}
+          POSTGRES_DB: ${{ secrets.POSTGRES_DB_TEST }}
         ports:
           - 5432:5432
         options: >-
@@ -33,7 +35,7 @@ jobs:
       - name: ⚙️ Configurar Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
 
       - name: 📦 Instalar dependências
         run: npm install
@@ -44,11 +46,11 @@ jobs:
       - name: 🧪 Rodar testes
         run: npm run test
         env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          DATABASE_URL: postgresql://${{ secrets.POSTGRES_USER_TEST }}:${{ secrets.POSTGRES_PASSWORD_TEST }}@postgres:5432/${{ secrets.POSTGRES_DB_TEST }}
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
           CLOUDINARY_NAME: ${{ secrets.CLOUDINARY_NAME }}
           CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
           CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
-
+          
       - name: 🐳 Build da imagem Docker
         run: docker build -t autolux-backend .
