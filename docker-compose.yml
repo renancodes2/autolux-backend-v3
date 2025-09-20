@@ -1,44 +1,22 @@
-version: '3.8'
-
+version: "3"
 services:
-  db:
-    image: postgres:15
-    container_name: autolux-db
-    restart: always
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: adminpizzaria
-      POSTGRES_DB: auto_lux
-    ports:
-      - "5432:5432"
-    volumes:
-      - pgdata:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-
-  backend:
+  api:
     build: .
     container_name: autolux-api
-    restart: always
-    depends_on:
-      db:
-        condition: service_healthy
-    ports:
-      - "3333:3333"
-    env_file:
-      - .env
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      JWT_SECRET: ${JWT_SECRET}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      CLOUDINARY_NAME: ${CLOUDINARY_NAME}
+      CLOUDINARY_API_KEY: ${CLOUDINARY_API_KEY}
+      CLOUDINARY_API_SECRET: ${CLOUDINARY_API_SECRET}
     networks:
       - autolux-net
-    volumes:
-      - autolux-app:/app 
-    command: ["./wait-for-it.sh", "db:5432", "--", "npm", "run", "start"]
-
-volumes:
-  pgdata:
-  autolux-app:
+    ports:
+      - "3333:3333"
 
 networks:
   autolux-net:
+    driver: bridge
