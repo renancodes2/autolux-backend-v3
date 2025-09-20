@@ -6,7 +6,7 @@
 
 - **NestJS** – Framework principal
 - **Prisma ORM** – Modelagem e acesso ao banco de dados
-- **PostgreSQL** – Banco de dados relacional
+- **PostgreSQL (via Neon)** – Banco de dados relacional
 - **JWT** – Autenticação e controle de acesso
 - **Multer + Cloudinary** – Upload e armazenamento de imagens
 - **Class-validator** – Validação dos dados
@@ -62,12 +62,11 @@
 
 ## 🐳 Suporte a Docker
 
-O projeto conta com:
+O projeto utiliza Docker para garantir ambientes de desenvolvimento e produção consistentes.
 
-- Dockerfile multi-stage (produção)  
-- Compose com banco PostgreSQL + healthcheck  
-- Volume nomeado, rede isolada e env por ambiente  
-- Ideal para ambientes de desenvolvimento e produção
+- Dockerfile com multi-stage build para imagens de produção mais leves e seguras.
+
+- Docker Compose para orquestração, incluindo o serviço da API, banco de dados e rede isolada.
 
 ```bash
 # Subir com Docker
@@ -131,6 +130,7 @@ Este projeto está sob a licença MIT.
 
 ## 👨‍💻 Autor
 
-Feito por [@renancodes2](https://github.com/renelps)  
+Feito por [@renancodes2](https://github.com/renancodes2)  
 Contribuições e feedbacks são bem-vindos!
+
 
