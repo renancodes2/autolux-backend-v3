@@ -1,7 +1,6 @@
-# Node modules
+
 node_modules/
 
-# Logs
 logs
 *.log
 npm-debug.log*
@@ -9,49 +8,39 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-# dotenv environment variables
 .env
 .env.*.local
 
-# Prisma
 prisma/dev.db
 prisma/dev.db-journal
-prisma/migrations/
 
-# Typescript
+
 dist/
 build/
 *.tsbuildinfo
 
-# VSCode
+
 .vscode/
 .history/
 
-# OS-specific
 .DS_Store
 Thumbs.db
 
-# Docker
 docker-compose.override.yml
 
-# Coverage reports
 coverage/
 .nyc_output/
 
-# Cache
 .cache/
 .next/
 out/
 turbo/
 .tmp/
 
-# IDEs
 .idea/
 *.sw?
 *.sublime*
 
-# Firebase (se usar auth ou deploy)
 .firebase/
 
-# Others
 *.local
