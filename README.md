@@ -65,7 +65,6 @@
 O projeto utiliza Docker para garantir ambientes de desenvolvimento e produção consistentes.
 
 - Dockerfile com multi-stage build para imagens de produção mais leves e seguras.
-
 - Docker Compose para orquestração, incluindo o serviço da API, banco de dados e rede isolada.
 
 ```bash
@@ -132,5 +131,6 @@ Este projeto está sob a licença MIT.
 
 Feito por [@renancodes2](https://github.com/renancodes2)  
 Contribuições e feedbacks são bem-vindos!
+
 
 
