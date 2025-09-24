@@ -12,7 +12,7 @@
 - **Class-validator**
 - **Docker (multi-stage)**
 - **GitHub Actions**
-- 
+
 ## 📦 Funcionalidades
 
 ### 🔐 Autenticação
@@ -130,6 +130,7 @@ Este projeto está sob a licença MIT.
 
 Feito por [@renancodes2](https://github.com/renancodes2)  
 Contribuições e feedbacks são bem-vindos!
+
 
 
 
