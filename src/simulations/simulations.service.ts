@@ -11,7 +11,7 @@ export class SimulationsService {
   private calculateSimpleInterest(amount: number, rate: number, installments: number): number {
     return amount * (rate / 100) * installments;
   }
-
+  
   private calculateCompoundInterest(amount: number, rate: number, installments: number): number {
     return amount * Math.pow(1 + rate / 100, installments) - amount;
   }

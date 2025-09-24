@@ -14,7 +14,7 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
 
   await app.listen(3333);
-  console.log('Backend rodando na porta 3333');
+  console.log('Backend running on port 3333');
 }
 
 void bootstrap();

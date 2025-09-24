@@ -9,7 +9,7 @@ export class AuthService {
 
 async validateUser(email: string, password: string) {
   if (!email || !password) {
-    throw new UnauthorizedException('Email e senha são obrigatórios');
+    throw new UnauthorizedException('Email and password are required');
   }
 
   const user = await this.prisma.user.findUnique({
@@ -19,7 +19,7 @@ async validateUser(email: string, password: string) {
   if (!user) throw new UnauthorizedException('Usuário não encontrado');
 
   const isPasswordValid = await bcrypt.compare(password, user.password);
-  if (!isPasswordValid) throw new UnauthorizedException('Senha inválida');
+  if (!isPasswordValid) throw new UnauthorizedException('invalid password');
 
   const { password: _, ...userWithoutPassword } = user;
   return userWithoutPassword;

@@ -18,7 +18,7 @@ export class VehiclesService {
 
   async uploadImagesToCloudinary(files: Express.Multer.File[]) {
     if (!files || files.length === 0) {
-      throw new BadRequestException('Pelo menos uma imagem é obrigatória.');
+      throw new BadRequestException('At least one image is mandatory');
     }
 
     const imageUrls = [];
@@ -38,7 +38,7 @@ export class VehiclesService {
     files: Express.Multer.File[],
   ) {
     if (!files || files.length === 0) {
-      throw new BadRequestException('Pelo menos uma imagem é obrigatória.');
+      throw new BadRequestException('At least one image is required');
     }
 
     const seller = await this.prisma.user.findUnique({ where: { id: userId } });
