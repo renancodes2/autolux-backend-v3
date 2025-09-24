@@ -4,15 +4,15 @@
 
 ## ⚙️ Tecnologias Utilizadas
 
-- **NestJS** – Framework principal
-- **Prisma ORM** – Modelagem e acesso ao banco de dados
-- **PostgreSQL (via Neon)** – Banco de dados relacional
-- **JWT** – Autenticação e controle de acesso
-- **Multer + Cloudinary** – Upload e armazenamento de imagens
-- **Class-validator** – Validação dos dados
-- **Docker (multi-stage)** – Ambientes isolados e prontos para produção
-- **GitHub Actions** – Integração contínua (CI)
-- **Insomnia / Thunder Client** – Testes de API
+- **NestJS**
+- **Prisma ORM**
+- **PostgreSQL (via Neon)**
+- **JWT**
+- **Multer + Cloudinary**
+- **Class-validator**
+- **Docker (multi-stage)**
+- **GitHub Actions**
+- **Insomnia**
 
 ## 📦 Funcionalidades
 
@@ -131,6 +131,7 @@ Este projeto está sob a licença MIT.
 
 Feito por [@renancodes2](https://github.com/renancodes2)  
 Contribuições e feedbacks são bem-vindos!
+
 
 
 
