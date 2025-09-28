@@ -1,6 +1,6 @@
 # 🚗 AutoLux - API para Loja de Veículos
 
-**AutoLux** é uma API RESTful robusta desenvolvida com **NestJS**, projetada para atender todas as necessidades de uma loja de veículos online. Ela oferece funcionalidades completas de autenticação, gerenciamento de veículos, pedidos, favoritos, simulações financeiras, avaliações e muito mais.
+**AutoLux** é uma API RESTful robusta desenvolvida com **NestJS**, projetada para atender todas as necessidades de uma loja de veículos online. Ela oferece funcionalidades completas de autenticação, gerenciamento de veículos, pedidos, favoritos, simulações financeiras, avaliações e muito mais. (A loja é de carros novos para deixar claro a função de avaliação, já que todos os clientes terão o carro novo com as mesmas especificações e a mesma experiência de compra)
 
 ## ⚙️ Tecnologias Utilizadas
 
@@ -138,6 +138,7 @@ Este projeto está sob a licença MIT.
 
 Feito por [@renancodes2](https://github.com/renancodes2)  
 Contribuições e feedbacks são bem-vindos!
+
 
 
 
