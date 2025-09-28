@@ -35,8 +35,9 @@
 
 ### ❤️ Sistema de Favoritos
 
-- Adicionar/remover veículos favoritos
-- Listagem dos favoritos do usuário autenticado
+  **Quando o usuário encontra um carro que deseja salvar para referência futura, ele pode marcá-lo como favorito. Isso pode ser feito, por exemplo, ao clicar em um ícone de coração (ou       similar) ao lado do carro na lista de veículos ou na página de detalhes do veículo.**
+
+  **O carro é então adicionado à lista de favoritos do usuário. Isso permite que o usuário acesse facilmente esse carro em outro momento, sem precisar realizar uma nova busca**
 
 ### 📦 Pedidos
 
@@ -51,7 +52,14 @@
 
 ### ⭐ Avaliações
 
-- Avaliar veículos com nota (rating) e comentário
+- Nota (rating): Os usuários podem avaliar o modelo do carro com uma nota de 1 a 5 estrelas, onde 1 é a pior avaliação e 5 é a melhor.
+
+- Comentário: Além da nota, o usuário pode deixar um comentário explicando a sua experiência com o veículo. Isso pode incluir aspectos como:
+
+  **Desempenho do carro (conforto, consumo de combustível, dirigibilidade, etc.)** 
+  **Qualidade de construção (acabamento, materiais usados, etc.)**
+  **Experiência de compra (facilidade de compra, tempo de entrega, atendimento ao cliente, etc.)**
+  **Satisfação geral com o veículo e com o processo de compra.**
 
 ### 📸 Upload de Imagens
 
@@ -130,6 +138,7 @@ Este projeto está sob a licença MIT.
 
 Feito por [@renancodes2](https://github.com/renancodes2)  
 Contribuições e feedbacks são bem-vindos!
+
 
 
 
