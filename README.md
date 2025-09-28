@@ -35,9 +35,9 @@
 
 ### ❤️ Sistema de Favoritos
 
-  **Quando o usuário encontra um carro que deseja salvar para referência futura, ele pode marcá-lo como favorito. Isso pode ser feito, por exemplo, ao clicar em um ícone de coração (ou       similar) ao lado do carro na lista de veículos ou na página de detalhes do veículo.**
+  - **Quando o usuário encontra um carro que deseja salvar para referência futura, ele pode marcá-lo como favorito. Isso pode ser feito, por exemplo, ao clicar em um ícone de coração (ou       similar) ao lado do carro na lista de veículos ou na página de detalhes do veículo.**
 
-  **O carro é então adicionado à lista de favoritos do usuário. Isso permite que o usuário acesse facilmente esse carro em outro momento, sem precisar realizar uma nova busca**
+  - **O carro é então adicionado à lista de favoritos do usuário. Isso permite que o usuário acesse facilmente esse carro em outro momento, sem precisar realizar uma nova busca**
 
 ### 📦 Pedidos
 
@@ -56,10 +56,10 @@
 
 - Comentário: Além da nota, o usuário pode deixar um comentário explicando a sua experiência com o veículo. Isso pode incluir aspectos como:
 
-  **Desempenho do carro (conforto, consumo de combustível, dirigibilidade, etc.)** 
-  **Qualidade de construção (acabamento, materiais usados, etc.)**
-  **Experiência de compra (facilidade de compra, tempo de entrega, atendimento ao cliente, etc.)**
-  **Satisfação geral com o veículo e com o processo de compra.**
+  - **Desempenho do carro (conforto, consumo de combustível, dirigibilidade, etc.)** 
+  - **Qualidade de construção (acabamento, materiais usados, etc.)**
+  - **Experiência de compra (facilidade de compra, tempo de entrega, atendimento ao cliente, etc.)**
+  - **Satisfação geral com o veículo e com o processo de compra.**
 
 ### 📸 Upload de Imagens
 
@@ -138,6 +138,7 @@ Este projeto está sob a licença MIT.
 
 Feito por [@renancodes2](https://github.com/renancodes2)  
 Contribuições e feedbacks são bem-vindos!
+
 
 
 
