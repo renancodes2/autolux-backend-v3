@@ -24,6 +24,7 @@
 
 ### 🚘 Veículos
 
+- Somente administradores podem adicionar novos carros à plataforma
 - Cadastro com até 5 imagens
 - Edição e exclusão (com permissão)
 - Busca geral ou individual
@@ -52,10 +53,9 @@
 
 ### ⭐ Avaliações
 
-- Nota (rating): Os usuários podem avaliar o modelo do carro com uma nota de 1 a 5 estrelas, onde 1 é a pior avaliação e 5 é a melhor.
+- **Nota (rating): Os usuários podem avaliar o modelo do carro com uma nota de 1 a 5 estrelas, onde 1 é a pior avaliação e 5 é a melhor.**
 
-- Comentário: Além da nota, o usuário pode deixar um comentário explicando a sua experiência com o veículo. Isso pode incluir aspectos como:
-
+- **Comentário: Além da nota, o usuário pode deixar um comentário explicando a sua experiência com o veículo. Isso pode incluir aspectos como:**
   - **Desempenho do carro (conforto, consumo de combustível, dirigibilidade, etc.)** 
   - **Qualidade de construção (acabamento, materiais usados, etc.)**
   - **Experiência de compra (facilidade de compra, tempo de entrega, atendimento ao cliente, etc.)**
@@ -138,6 +138,7 @@ Este projeto está sob a licença MIT.
 
 Feito por [@renancodes2](https://github.com/renancodes2)  
 Contribuições e feedbacks são bem-vindos!
+
 
 
 
