@@ -35,7 +35,8 @@ export class VehiclesController {
     @GetUser() user: any,
     @UploadedFiles() files: Express.Multer.File[],
   ) {
-    return this.vehiclesService.create(dto, user.userId, files);
+    return this.vehiclesService.create(dto, user.id, files);
+
   }
 
   @Get()
