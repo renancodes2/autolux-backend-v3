@@ -16,8 +16,10 @@ FROM node:18-bullseye
 
 WORKDIR /app
 
-COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/dist ./dist 
+
 COPY --from=builder /app/node_modules ./node_modules
+
 COPY --from=builder /app/package*.json ./
 
 COPY --from=builder /app/prisma ./prisma
@@ -26,4 +28,4 @@ ENV NODE_ENV=production
 
 EXPOSE 3333
 
-CMD ["node", "dist/main.js"]
+CMD ["npm", "run", "start:prod"]
