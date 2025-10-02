@@ -10,7 +10,6 @@
     "emitDecoratorMetadata": true,
     "moduleResolution": "node",
     "outDir": "./dist",
-    "rootDir": "./src",
     "sourceMap": true
   },
   "include": ["src/**/*", "jest.config.ts"],
