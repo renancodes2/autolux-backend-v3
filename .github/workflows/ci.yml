@@ -29,45 +29,44 @@ jobs:
           --health-retries 5
 
     steps:
-      - name: ⬇️ Checkout Repository
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: ⚙️ Setup Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      - name: 📦 Install Dependencies
+      - name: Install Dependencies
         run: npm install
 
-      - name: ⚙️ Generate Prisma Client
+      - name: Generate Prisma Client
         run: npx prisma generate
 
-      - name: 🧪 Run Tests
+      - name: Run Tests
         run: npm run test
         env:
-          DATABASE_URL: postgresql://${{ secrets.POSTGRES_USER_TEST }}:${{ secrets.POSTES_PASSWORD_TEST }}@postgres:5432/${{ secrets.POSTGRES_DB_TEST }}
+          DATABASE_URL: postgresql://${{ secrets.POSTGRES_USER_TEST }}:${{ secrets.POSTGRES_PASSWORD_TEST }}@postgres:5432/${{ secrets.POSTGRES_DB_TEST }}
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
           CLOUDINARY_NAME: ${{ secrets.CLOUDINARY_NAME }}
           CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
           CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
           
-      - name: 🐳 Build Docker Image (Marked as Public)
-        run: docker build -t autolux-backend . --label org.opencontainers.image.visibility=public
+      - name: Build Docker Image
+        run: docker build -t autolux-backend . --label org.opencontainers.image.visibility=public --no-cache
 
-      - name: 🐋 Tag Image for GHCR
+      - name: Tag Image for GHCR
         run: |
           IMAGE_NAME="ghcr.io/${{ github.repository }}/autolux-api"
           docker tag autolux-backend:latest $IMAGE_NAME:latest
           echo "IMAGE_NAME=$IMAGE_NAME" >> $GITHUB_ENV
 
-      - name: 🔑 Login to GitHub Container Registry (GHCR)
+      - name: Login to GitHub Container Registry (GHCR)
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.CR_PAT }}
 
-      - name: 🚀 Push Image to GHCR
-        run: |
-          docker push ${{ env.IMAGE_NAME }}:latest
+      - name: Push Image to GHCR
+        run: docker push ${{ env.IMAGE_NAME }}:latest
