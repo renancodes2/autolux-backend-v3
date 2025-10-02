@@ -46,22 +46,19 @@ jobs:
       - name: 🧪 Run Tests
         run: npm run test
         env:
-          DATABASE_URL: postgresql://${{ secrets.POSTGRES_USER_TEST }}:${{ secrets.POSTGRES_PASSWORD_TEST }}@postgres:5432/${{ secrets.POSTGRES_DB_TEST }}
+          DATABASE_URL: postgresql://${{ secrets.POSTGRES_USER_TEST }}:${{ secrets.POSTES_PASSWORD_TEST }}@postgres:5432/${{ secrets.POSTGRES_DB_TEST }}
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
           CLOUDINARY_NAME: ${{ secrets.CLOUDINARY_NAME }}
           CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
           CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
           
-      - name: 🐳 Build Docker Image
-        run: docker build -t autolux-backend .
+      - name: 🐳 Build Docker Image (Marked as Public)
+        run: docker build -t autolux-backend . --label org.opencontainers.image.visibility=public
 
       - name: 🐋 Tag Image for GHCR
         run: |
-          # Defines the image name in the Container Registry format: ghcr.io/USER/REPOSITORY/IMAGE_NAME
           IMAGE_NAME="ghcr.io/${{ github.repository }}/autolux-api"
-          # Adds the 'latest' tag
           docker tag autolux-backend:latest $IMAGE_NAME:latest
-          # Saves the image name for the next step
           echo "IMAGE_NAME=$IMAGE_NAME" >> $GITHUB_ENV
 
       - name: 🔑 Login to GitHub Container Registry (GHCR)
