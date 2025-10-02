@@ -1,4 +1,3 @@
-
 FROM node:18-bullseye AS builder
 
 WORKDIR /app
@@ -27,4 +26,4 @@ ENV NODE_ENV=production
 
 EXPOSE 3333
 
-CMD ["node", "dist/main"]
+CMD ["node", "dist/main.js"]
