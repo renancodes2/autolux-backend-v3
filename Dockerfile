@@ -6,8 +6,12 @@ COPY package*.json ./
 RUN npm install
 
 COPY . .
+
 RUN npx prisma generate
-RUN npm run build 
+
+RUN npm run build
+
+RUN ls -l ./dist
 
 FROM node:18-bullseye
 
@@ -19,4 +23,4 @@ ENV NODE_ENV=production
 
 EXPOSE 3333
 
-CMD ["node", "dist/main.js"] 
+CMD ["node", "dist/main.js"]

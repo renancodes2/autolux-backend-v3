@@ -51,10 +51,14 @@ jobs:
           CLOUDINARY_NAME: ${{ secrets.CLOUDINARY_NAME }}
           CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
           CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
-          
+
       - name: Build Docker Image
         run: docker build -t autolux-backend . --label org.opencontainers.image.visibility=public --no-cache
 
+      - name: Verify dist folder in Docker image
+        run: |
+          docker run --rm autolux-backend ls -l /app/dist
+        continue-on-error:
       - name: Tag Image for GHCR
         run: |
           IMAGE_NAME="ghcr.io/${{ github.repository }}/autolux-api"
