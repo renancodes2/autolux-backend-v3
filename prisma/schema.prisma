@@ -15,9 +15,8 @@ enum Role {
 enum OrderStatus {
   PENDING
   APPROVED
-  PREPARING
-  SENT
-  DELIVERED
+  IN_PROGRESS
+  COMPLETED
   CANCELLED
 }
 
@@ -45,6 +44,10 @@ model User {
   favorites   Favorite[]
   simulations Simulation[]
   reviews     Review[]
+
+  chats       Chat[]      @relation("ChatParticipants")
+
+  messages    Message[]   @relation("SenderMessages")
 }
 
 
@@ -155,4 +158,28 @@ model Review {
 
   vehicle   Vehicle  @relation(fields: [vehicleId], references: [id])
   vehicleId String
+}
+
+model Chat {
+  id          String   @id @default(uuid())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  participants User[]   @relation("ChatParticipants")
+
+  messages    Message[]
+}
+
+
+model Message {
+  id          String   @id @default(uuid())
+  content     String
+  createdAt   DateTime @default(now())
+
+  senderId    String
+  sender      User     @relation("SenderMessages", fields: [senderId], references: [id])
+
+
+  chatId      String
+  chat        Chat     @relation(fields: [chatId], references: [id])
 }
