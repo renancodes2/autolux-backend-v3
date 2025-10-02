@@ -10,7 +10,7 @@ COPY . .
 
 RUN npx prisma generate
 
-RUN npm run build
+RUN npm run build 
 
 FROM node:18-bullseye
 
@@ -24,8 +24,10 @@ COPY --from=builder /app/package*.json ./
 
 COPY --from=builder /app/prisma ./prisma
 
+RUN chmod -R 755 dist
+
 ENV NODE_ENV=production
 
 EXPOSE 3333
 
-CMD ["npm", "run", "start:prod"]
+CMD ["node", "dist/main.js"]
