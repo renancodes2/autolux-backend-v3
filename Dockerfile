@@ -1,4 +1,4 @@
-FROM node:20-alpine AS builder
+FROM node:18-bullseye AS builder
 
 WORKDIR /app
 
@@ -7,19 +7,23 @@ RUN npm install
 
 COPY . .
 
+RUN npx prisma generate
+
 RUN npm run build
 
-FROM node:20-alpine
+RUN ls -l ./dist
+
+FROM node:18-bullseye
 
 WORKDIR /app
 
-COPY --from=builder /app /app
+COPY --from=builder /app/dist /app/dist
+COPY --from=builder /app/package*.json /app/
+
+RUN npm install --only=production
 
 ENV NODE_ENV=production
 
 EXPOSE 3333
 
-ENTRYPOINT ["/bin/sh", "-c", "npm install && npm run build && npx prisma migrate deploy"]
-
 CMD ["node", "dist/main.js"]
-
