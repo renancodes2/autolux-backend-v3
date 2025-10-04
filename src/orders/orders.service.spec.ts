@@ -2,7 +2,16 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { OrdersService } from './orders.service';
 import { PrismaService } from '../prisma/prisma.service';
 import { NotFoundException } from '@nestjs/common';
-import { OrderStatus } from '@prisma/client';
+import { CreateOrderDto } from '../orders/dto/create-order.dto'; 
+import { UpdateOrderDto } from '../orders/dto/update-order.dto'; 
+
+export enum OrderStatus {
+    PENDING = 'PENDING',
+    APPROVED = 'APPROVED',
+    IN_PROGRESS = 'IN_PROGRESS',
+    COMPLETED = 'COMPLETED',
+    CANCELLED = 'CANCELLED',
+}
 
 describe('OrdersService', () => {
   let service: OrdersService;
@@ -32,10 +41,10 @@ describe('OrdersService', () => {
   });
 
   it('should create an order', async () => {
-    const dto = {
+    const dto: CreateOrderDto = {
       buyerId: 'buyer1',
       vehicleId: 'vehicle1',
-      status: OrderStatus.PENDING,
+      status: OrderStatus.PENDING as any, 
     };
 
     const mockOrder = { id: 'order1', ...dto, createdAt: new Date() };
@@ -84,7 +93,7 @@ describe('OrdersService', () => {
 
   it('should update an order', async () => {
     const id = 'order1';
-    const updateDto = { status: OrderStatus.APPROVED };
+    const updateDto: UpdateOrderDto = { status: OrderStatus.APPROVED as any };
 
     const mockOrder = { id, buyerId: 'buyer1', vehicleId: 'vehicle1', status: OrderStatus.PENDING, createdAt: new Date() };
     const updatedOrder = { ...mockOrder, status: OrderStatus.APPROVED };

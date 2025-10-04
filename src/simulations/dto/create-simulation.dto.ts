@@ -1,5 +1,9 @@
 import { IsNotEmpty, IsNumber, IsString, IsEnum, IsOptional } from 'class-validator';
-import { InterestType } from '@prisma/client';
+
+export enum InterestType {
+  SIMPLE = 'SIMPLE',
+  COMPOUND = 'COMPOUND',
+}
 
 export class CreateSimulationDto {
   @IsNumber()
@@ -16,14 +20,13 @@ export class CreateSimulationDto {
   cet?: number;
 
   @IsEnum(InterestType)
-  @IsOptional()
-  interestType?: InterestType;
+  interestType: InterestType = InterestType.COMPOUND;
 
   @IsString()
   @IsNotEmpty()
   userId!: string;
 
   @IsString()
-  @IsNotEmpty()
+  @IsNotEmpty() 
   vehicleId!: string;
 }

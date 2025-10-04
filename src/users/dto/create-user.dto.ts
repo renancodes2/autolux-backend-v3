@@ -8,7 +8,11 @@ import {
   IsUrl,
   IsPhoneNumber,
 } from 'class-validator';
-import { Role } from '@prisma/client';
+
+enum Role {
+  ADMIN = 'ADMIN',
+  USER = 'USER',
+}
 
 export class CreateUserDto {
   @IsString()

@@ -1,4 +1,4 @@
-FROM node:18-bullseye AS builder
+FROM node:22-bullseye AS builder
 
 WORKDIR /app
 
@@ -11,19 +11,15 @@ RUN npx prisma generate
 
 RUN npm run build
 
-RUN ls -l ./dist
-
-FROM node:18-bullseye
+FROM node:22-bullseye
 
 WORKDIR /app
 
-COPY --from=builder /app/dist /app/dist
+COPY --from=builder /app/dist/ /app/dist/
 COPY --from=builder /app/package*.json /app/
 
-RUN npm install --only=production
-
-ENV NODE_ENV=production
+COPY --from=builder /app/node_modules /app/node_modules
 
 EXPOSE 3333
 
-CMD ["node", "dist/main.js"]
+CMD ["npm", "run", "start:prod"]

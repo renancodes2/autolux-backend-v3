@@ -1,8 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import { CreateSimulationDto } from './dto/create-simulation.dto';
+import { CreateSimulationDto, InterestType } from './dto/create-simulation.dto';
 import { UpdateSimulationDto } from './dto/update-simulation.dto';
-import { InterestType } from '@prisma/client';
+import { Prisma } from '@prisma/client';
 
 @Injectable()
 export class SimulationsService {
@@ -11,7 +11,7 @@ export class SimulationsService {
   private calculateSimpleInterest(amount: number, rate: number, installments: number): number {
     return amount * (rate / 100) * installments;
   }
-  
+
   private calculateCompoundInterest(amount: number, rate: number, installments: number): number {
     return amount * Math.pow(1 + rate / 100, installments) - amount;
   }
@@ -61,21 +61,21 @@ export class SimulationsService {
       interestType,
     );
 
-    return this.prisma.simulation.create({
-      data: {
-        downPayment: data.downPayment,
-        installments: data.installments,
-        interestRate: data.interestRate,
-        result,
-        financedAmount,
-        totalPaid,
-        interestType,
-        cet: data.cet,
-        details,
-        userId,
-        vehicleId: data.vehicleId,
-      },
-    });
+    const simulationData: Prisma.SimulationUncheckedCreateInput = {
+      downPayment: data.downPayment,
+      installments: data.installments,
+      interestRate: data.interestRate,
+      result,
+      financedAmount,
+      totalPaid,
+      interestType: interestType as any,
+      cet: data.cet,
+      details,
+      userId: userId,
+      vehicleId: data.vehicleId,
+    };
+
+    return this.prisma.simulation.create({ data: simulationData });
   }
 
   async findAll() {
@@ -99,24 +99,29 @@ export class SimulationsService {
     const installments = data.installments ?? currentSimulation.installments;
     const interestRate = data.interestRate ?? currentSimulation.interestRate;
 
+    if ('userId' in data) delete (data as any).userId;
+    if ('vehicleId' in data) delete (data as any).vehicleId;
+
     const { result, financedAmount, totalPaid, details } = this.calculateFinancing(
       downPayment,
       installments,
       interestRate,
       vehicle.price,
-      interestType,
+      interestType as InterestType,
     );
+
+    const updateData: Prisma.SimulationUncheckedUpdateInput = {
+      ...data,
+      result,
+      financedAmount,
+      totalPaid,
+      details,
+      interestType: interestType as any,
+    };
 
     return this.prisma.simulation.update({
       where: { id },
-      data: {
-        ...data,
-        result,
-        financedAmount,
-        totalPaid,
-        details,
-        interestType,
-      },
+      data: updateData,
     });
   }
 

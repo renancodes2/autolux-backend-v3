@@ -15,8 +15,9 @@ enum Role {
 enum OrderStatus {
   PENDING
   APPROVED
-  IN_PROGRESS
-  COMPLETED
+  PREPARING
+  SENT
+  DELIVERED
   CANCELLED
 }
 

@@ -1,8 +1,14 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { SimulationsService } from './simulations.service';
 import { PrismaService } from '../prisma/prisma.service';
-import { InterestType } from '@prisma/client';
 import { NotFoundException } from '@nestjs/common';
+import { CreateSimulationDto } from './dto/create-simulation.dto';
+import { UpdateSimulationDto } from './dto/update-simulation.dto';
+
+export enum InterestType {
+  SIMPLE = 'SIMPLE',
+  COMPOUND = 'COMPOUND',
+}
 
 describe('SimulationsService', () => {
   let service: SimulationsService;
@@ -61,13 +67,14 @@ describe('SimulationsService', () => {
   });
 
   it('should create a simulation', async () => {
-    const dto = {
+    const dto: CreateSimulationDto = {
       vehicleId: 'vehicle1',
       downPayment: 1000,
       installments: 12,
       interestRate: 1,
       cet: 2,
       interestType: InterestType.COMPOUND,
+      userId: 'user1', 
     };
 
     const result = await service.create(dto as any, 'user1');
@@ -103,14 +110,14 @@ describe('SimulationsService', () => {
   });
 
   it('should update a simulation', async () => {
-    const updateDto = {
+    const updateDto: UpdateSimulationDto = {
       downPayment: 1500,
       installments: 10,
       interestRate: 2,
       interestType: InterestType.SIMPLE,
     };
 
-    const result = await service.update('simulation1', updateDto);
+    const result = await service.update('simulation1', updateDto as any);
 
     expect(prisma.simulation.update).toHaveBeenCalledWith(expect.objectContaining({
       where: { id: 'simulation1' },
