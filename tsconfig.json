@@ -13,6 +13,12 @@
     "rootDir": "./src",
     "sourceMap": true
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules"]
+  "include": [
+    "src/**/*",
+    "jest.config.js",
+    "src/jest.setup.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

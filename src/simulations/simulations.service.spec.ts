@@ -5,7 +5,7 @@ import { NotFoundException } from '@nestjs/common';
 import { CreateSimulationDto } from './dto/create-simulation.dto';
 import { UpdateSimulationDto } from './dto/update-simulation.dto';
 
-export enum InterestType {
+enum InterestType {
   SIMPLE = 'SIMPLE',
   COMPOUND = 'COMPOUND',
 }

@@ -2,12 +2,13 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { AuthService } from './auth.service';
 import { PrismaService } from '../prisma/prisma.service';
 import { JwtService } from '@nestjs/jwt';
-import bcrypt from 'bcrypt';
+import * as bcrypt from 'bcrypt';
 import { UnauthorizedException } from '@nestjs/common';
 import { Role } from '@prisma/client';
 
 jest.mock('bcrypt', () => ({
   compare: jest.fn(),
+  hash: jest.fn(),
 }));
 
 describe('AuthService', () => {
@@ -67,13 +68,13 @@ describe('AuthService', () => {
 
     it('should throw UnauthorizedException if password is invalid', async () => {
       jest.spyOn(prisma.user, 'findUnique').mockResolvedValue(mockUser);
-      (bcrypt.compare as jest.Mock).mockImplementation(async () => false);
+      (bcrypt.compare as jest.Mock).mockResolvedValue(false); 
       await expect(service.validateUser('test@example.com', 'wrongpassword')).rejects.toThrow(UnauthorizedException);
     });
 
     it('should return user without password if credentials are valid', async () => {
       jest.spyOn(prisma.user, 'findUnique').mockResolvedValue(mockUser);
-      (bcrypt.compare as jest.Mock).mockImplementation(async () => true);
+      (bcrypt.compare as jest.Mock).mockResolvedValue(true);
       const result = await service.validateUser('test@example.com', 'correctpassword');
       expect(result).toEqual({
         id: mockUser.id,
@@ -91,6 +92,7 @@ describe('AuthService', () => {
 
   describe('login', () => {
     it('should return token and user on login', async () => {
+      // Mock do método validateUser
       jest.spyOn(service, 'validateUser').mockResolvedValue({
         id: mockUser.id,
         name: mockUser.name,
